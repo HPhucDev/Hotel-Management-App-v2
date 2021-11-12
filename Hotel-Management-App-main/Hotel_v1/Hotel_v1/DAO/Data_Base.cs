@@ -14,7 +14,7 @@ namespace Hotel_v1
 {
     class Data_Base
     {
-        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-RSHOI2U\SQLEXPRESS;Initial Catalog=Hotel_DBMS;Integrated Security=True");
+        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-RSHOI2U\SQLEXPRESS;Initial Catalog=Hotel;Integrated Security=True");
 
         //get the connection
         public SqlConnection getConnection

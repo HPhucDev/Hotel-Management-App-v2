@@ -99,10 +99,14 @@ namespace Hotel_v1
         }
         private void lịchLàmViệcToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CalendarForm frmCalendar = new CalendarForm();
-            this.Hide();
-            frmCalendar.ShowDialog();
-            this.Show();
+            try
+            {
+                CalendarForm frmCalendar = new CalendarForm();
+                this.Hide();
+                frmCalendar.ShowDialog();
+                this.Show();
+            }
+            catch { }
         }
 
         private void thêmXóaSửaNhânViênToolStripMenuItem_Click(object sender, EventArgs e)

@@ -76,14 +76,31 @@ namespace Hotel_v1
             }
             return true;
         }
+        public bool deleteAllCalendar()
+        {
+            SqlCommand command1 = new SqlCommand();
+            command1.CommandText = "DELETE FROM calendar";
+            command1.Connection = mydb.getConnection;
+            mydb.openConnection();
+            if (command1.ExecuteNonQuery() == 1)
+            {
+                mydb.closeConnection();
+                return true;
+            }
+            else
+            {
+                mydb.closeConnection();
+                return false;
+            }
+        }
         public bool deleteNhanvien(string id)
         {
-            SqlCommand command = new SqlCommand();
-            command.CommandText = "DELETE FROM Account WHERE Username=@id";
-            command.Connection = mydb.getConnection;
-            command.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
+            SqlCommand command1 = new SqlCommand();
+            command1.CommandText = "DELETE FROM Account WHERE Username=@id";
+            command1.Connection = mydb.getConnection;
+            command1.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
             mydb.openConnection();
-            if (command.ExecuteNonQuery() == 1)
+            if (command1.ExecuteNonQuery() == 1)
             {
                 mydb.closeConnection();
                 return true;
@@ -97,7 +114,7 @@ namespace Hotel_v1
         public DataTable getAllNhanvien()
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM Account";
+            command.CommandText = "SELECT * FROM dbo.Account_data";
             command.Connection = mydb.getConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataTable table = new DataTable();
@@ -107,7 +124,7 @@ namespace Hotel_v1
         public DataTable search(string key)
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT * FROM Account WHERE CONCAT(Username,Fname,Lname,Address,Phone,Type) LIKE '%" + key + "%'";
+            command.CommandText = "SELECT * FROM  dbo.f_SearchAccount('%"+key+"%')";
             command.Connection = mydb.getConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataTable table = new DataTable();
@@ -151,28 +168,34 @@ namespace Hotel_v1
         }
         public bool insertCalendar(int id, string shift, DateTime date)
         {
-            SqlCommand command = new SqlCommand();
-            command.CommandText = "INSERT INTO calendar(ID,Shift,Date)" + "VALUES (@id,@shift,@date)";
-            command.Connection = mydb.getConnection;
-            command.Parameters.Add("@id", SqlDbType.Int).Value = id;
-            command.Parameters.Add("shift", SqlDbType.NVarChar).Value = shift;
-            command.Parameters.Add("@date", SqlDbType.DateTime).Value = date;
-            mydb.openConnection();
-            if (command.ExecuteNonQuery() == 1)
+            try
             {
-                mydb.closeConnection();
-                return true;
+                SqlCommand command = new SqlCommand();
+                command.CommandText = "INSERT INTO calendar(ID,Shift,Date)" + "VALUES (@id,@shift,@date)";
+                command.Connection = mydb.getConnection;
+                command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                command.Parameters.Add("shift", SqlDbType.NVarChar).Value = shift;
+                command.Parameters.Add("@date", SqlDbType.DateTime).Value = date;
+                mydb.openConnection();
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    mydb.closeConnection();
+                    return true;
+                }
+                else
+                {
+                    mydb.closeConnection();
+                    return false;
+                }
             }
-            else
-            {
-                mydb.closeConnection();
-                return false;
-            }
+            catch { };
+            return true;
+            
         }
         public DataTable getCalendar()
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT ID, Fname AS [First Name],Lname AS [Last Name],Type AS [Position],Shift,CONVERT(varchar,Date,101) AS [Date],Phone FROM calendar INNER JOIN Account ON calendar.ID=Account.UserID";
+            command.CommandText = "SELECT* from dbo.Calendar_data";
             command.Connection = mydb.getConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataTable table = new DataTable();
@@ -213,7 +236,7 @@ namespace Hotel_v1
         public DataTable findCalendar(int id)
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT ID,Fname AS [First Name],Lname AS [Last Name],Type AS [Position],Shift,CONVERT(varchar,Date,101) AS [Date],Phone FROM calendar INNER JOIN Account ON calendar.ID=Account.UserID WHERE CONVERT(varchar,Date,101) >=CONVERT(varchar,GETDATE(),101) AND ID=@id";
+            command.CommandText = "SELECT* from dbo.f_FindCalendar(@id)";
             command.Parameters.Add("@id", SqlDbType.Int).Value = id;
             command.Connection = mydb.getConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(command);
@@ -224,7 +247,7 @@ namespace Hotel_v1
         public DataTable getMyCalendar(int userid)
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT Shift,CONVERT(varchar, Date,101) AS[Date] FROM calendar WHERE CONVERT(varchar,Date,101) >=CONVERT(varchar,GETDATE(),101) AND  ID=@userid";
+            command.CommandText = "SELECT *from dbo.f_getMyCalendar(@userid)";
             command.Parameters.Add("@userid", SqlDbType.Int).Value = userid;
             command.Connection = mydb.getConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(command);

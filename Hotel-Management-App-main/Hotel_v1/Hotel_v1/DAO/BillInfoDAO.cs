@@ -28,7 +28,7 @@ namespace Hotel_v1
         {
             List<BillInfo> listBillInfo = new List<BillInfo>();
 
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.BillInfo WHERE idBill = " + id);
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.BillInfo_data WHERE idBill = " + id);
 
             foreach (DataRow item in data.Rows)
             {

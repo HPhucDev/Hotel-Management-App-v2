@@ -34,6 +34,7 @@
             this.btnToday = new Guna.UI2.WinForms.Guna2Button();
             this.btnAdd = new Guna.UI2.WinForms.Guna2Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.deleteButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +47,6 @@
             this.txbUserID.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txbUserID.DisabledState.Parent = this.txbUserID;
             this.txbUserID.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txbUserID.Enabled = false;
             this.txbUserID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txbUserID.FocusedState.Parent = this.txbUserID;
             this.txbUserID.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -57,7 +57,6 @@
             this.txbUserID.Name = "txbUserID";
             this.txbUserID.PasswordChar = '\0';
             this.txbUserID.PlaceholderText = "";
-            this.txbUserID.ReadOnly = true;
             this.txbUserID.SelectedText = "";
             this.txbUserID.ShadowDecoration.Parent = this.txbUserID;
             this.txbUserID.Size = new System.Drawing.Size(146, 54);
@@ -148,11 +147,22 @@
             this.dataGridView1.TabIndex = 73;
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(15, 878);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(226, 63);
+            this.deleteButton.TabIndex = 79;
+            this.deleteButton.Text = "Delete All Calendar";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // CalendarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1381, 995);
+            this.ClientSize = new System.Drawing.Size(1460, 995);
+            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.txbUserID);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.btn7day);
@@ -177,5 +187,6 @@
         private Guna.UI2.WinForms.Guna2Button btnToday;
         private Guna.UI2.WinForms.Guna2Button btnAdd;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

@@ -27,7 +27,7 @@ namespace Hotel_v1
         /// <returns></returns>
         public int GetUncheckBillIDByRoomID(int id)
         {
-            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.Bill WHERE idRoom = " + id + " AND status = 0");
+            DataTable data = DataProvider.Instance.ExecuteQuery("SELECT * FROM dbo.f_GetUncheckBillIDByRoomID("+ id+")");
 
             if (data.Rows.Count > 0)
             {
@@ -67,7 +67,7 @@ namespace Hotel_v1
         {
             try
             {
-                return (int)DataProvider.Instance.ExecuteScalar("SELECT MAX(id) FROM dbo.Bill");
+                return (int)DataProvider.Instance.ExecuteScalar("SELECT MAX(id) FROM Bill_data");
             }
             catch
             {

@@ -55,74 +55,78 @@ namespace Hotel_v1
             int countRe = 0;
             int countLa = 0;
             //Manager
-            while (countMa != lcm(lcm(lengthMa, lengthRe), lengthLa))
+            try
             {
-                indexMa %= lengthMa;
-                int temp = indexMa;
-                int inc = 0;
-                for (int i = 0; i < 2; i++)
+                while (countMa != lcm(lcm(lengthMa, lengthRe), lengthLa))
                 {
-                    if (i >= 1)
+                    indexMa %= lengthMa;
+                    int temp = indexMa;
+                    int inc = 0;
+                    for (int i = 0; i < 2; i++)
                     {
-                        employee.insertCalendar(Convert.ToInt32(arrMa[(temp + inc) % lengthMa]), "Afternoon", dayMa);
+                        if (i >= 1)
+                        {
+                            employee.insertCalendar(Convert.ToInt32(arrMa[(temp + inc) % lengthMa]), "Afternoon", dayMa);
+                        }
+                        else
+                        {
+                            employee.insertCalendar(Convert.ToInt32(arrMa[(temp + inc) % lengthMa]), "Morning", dayMa);
+                        }
+                        inc++;
                     }
-                    else
-                    {
-                        employee.insertCalendar(Convert.ToInt32(arrMa[(temp + inc) % lengthMa]), "Morning", dayMa);
-                    }
-                    inc++;
+                    employee.insertCalendar(Convert.ToInt32(arrMa[temp]), "Night", dayMa);
+                    indexMa++;
+                    dayMa = dayMa.AddDays(1);
+                    countMa++;
                 }
-                employee.insertCalendar(Convert.ToInt32(arrMa[temp]), "Night", dayMa);
-                indexMa++;
-                dayMa = dayMa.AddDays(1);
-                countMa++;
-            }
-            //Reception
-            while (countRe != lcm(lcm(lengthMa, lengthRe), lengthLa))
-            {
-                indexRe %= lengthRe;
-                int temp = indexRe;
-                int inc = 0;
-                for (int i = 0; i < 4; i++)
+                //Reception
+                while (countRe != lcm(lcm(lengthMa, lengthRe), lengthLa))
                 {
-                    if (i >= 2)
+                    indexRe %= lengthRe;
+                    int temp = indexRe;
+                    int inc = 0;
+                    for (int i = 0; i < 4; i++)
                     {
-                        employee.insertCalendar(Convert.ToInt32(arrRe[(temp + inc) % lengthRe]), "Afternoon", dayRe);
+                        if (i >= 2)
+                        {
+                            employee.insertCalendar(Convert.ToInt32(arrRe[(temp + inc) % lengthRe]), "Afternoon", dayRe);
+                        }
+                        else
+                        {
+                            employee.insertCalendar(Convert.ToInt32(arrRe[(temp + inc) % lengthRe]), "Morning", dayRe);
+                        }
+                        inc++;
                     }
-                    else
-                    {
-                        employee.insertCalendar(Convert.ToInt32(arrRe[(temp + inc) % lengthRe]), "Morning", dayRe);
-                    }
-                    inc++;
+                    employee.insertCalendar(Convert.ToInt32(arrRe[temp]), "Night", dayRe);
+                    indexRe++;
+                    dayRe = dayRe.AddDays(1);
+                    countRe++;
                 }
-                employee.insertCalendar(Convert.ToInt32(arrRe[temp]), "Night", dayRe);
-                indexRe++;
-                dayRe = dayRe.AddDays(1);
-                countRe++;
-            }
-            //Labor
-            while (countLa != lcm(lcm(lengthMa, lengthRe), lengthLa))
-            {
-                indexLa %= lengthLa;
-                int temp = indexLa;
-                int inc = 0;
-                for (int i = 0; i < 8; i++)
+                //Labor
+                while (countLa != lcm(lcm(lengthMa, lengthRe), lengthLa))
                 {
-                    if (i >= 4)
+                    indexLa %= lengthLa;
+                    int temp = indexLa;
+                    int inc = 0;
+                    for (int i = 0; i < 8; i++)
                     {
-                        employee.insertCalendar(Convert.ToInt32(arrLa[(temp + inc) % lengthLa]), "Afternoon", dayLa);
+                        if (i >= 4)
+                        {
+                            employee.insertCalendar(Convert.ToInt32(arrLa[(temp + inc) % lengthLa]), "Afternoon", dayLa);
+                        }
+                        else
+                        {
+                            employee.insertCalendar(Convert.ToInt32(arrLa[(temp + inc) % lengthLa]), "Morning", dayLa);
+                        }
+                        inc++;
                     }
-                    else
-                    {
-                        employee.insertCalendar(Convert.ToInt32(arrLa[(temp + inc) % lengthLa]), "Morning", dayLa);
-                    }
-                    inc++;
+                    employee.insertCalendar(Convert.ToInt32(arrLa[temp]), "Night", dayLa);
+                    indexLa++;
+                    dayLa = dayLa.AddDays(1);
+                    countLa++;
                 }
-                employee.insertCalendar(Convert.ToInt32(arrLa[temp]), "Night", dayLa);
-                indexLa++;
-                dayLa = dayLa.AddDays(1);
-                countLa++;
             }
+            catch { }
             dataGridView1.DataSource = employee.getCalendar();
         }
 
@@ -169,6 +173,13 @@ namespace Hotel_v1
             {
                 dataGridView1.DataSource = employee.findCalendar(Convert.ToInt32(txbUserID.Text));
             }
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            employee.deleteAllCalendar();
+            CalendarForm_Load(sender, e);
+
         }
     }
 }

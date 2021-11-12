@@ -28,7 +28,7 @@ namespace Hotel_v1
         {
             List<Category> list = new List<Category>();
 
-            string query = "select * from ServiceCategory";
+            string query = "select * from ServiceCategory_data";
 
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
@@ -42,7 +42,7 @@ namespace Hotel_v1
         }
         public DataTable GetAllCategory()
         {
-            string query = "select * from ServiceCategory";
+            string query = "select * from ServiceCategory_data";
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
             return data;
         }

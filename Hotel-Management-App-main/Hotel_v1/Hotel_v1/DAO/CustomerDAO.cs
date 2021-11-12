@@ -46,9 +46,7 @@ namespace Hotel_v1
         public DataTable search(string key)
         {
             SqlCommand command = new SqlCommand();
-            command.CommandText = "SELECT RoomService.name as Room,Fname as [First Name],Lname as [ Last Name ],CMND,Sex,Phone,Address,DateCheckIn,DateCheckOut " +
-                                    "FROM Customer inner join RoomService on Customer.IDRoom = RoomService.id " +
-                                    "WHERE CONCAT(Fname, Lname, Address, Phone, CMND) LIKE '%" +key+"%'";
+            command.CommandText = "SELECT * FROM dbo.f_SearchCustomer('%"+key+"%')";
             command.Connection = mydb.getConnection;
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataTable table = new DataTable();

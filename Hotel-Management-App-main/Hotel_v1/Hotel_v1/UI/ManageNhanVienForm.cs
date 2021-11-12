@@ -186,17 +186,17 @@ namespace Hotel_v1
                     }
                     else
                     {
-                        MessageBox.Show("Error", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error", "Note", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("enter a ID", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("enter a ID", "Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("You Must Detele Calendar Before Delete Staff ! ","Note", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 

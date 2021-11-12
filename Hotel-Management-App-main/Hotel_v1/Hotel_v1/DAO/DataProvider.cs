@@ -20,7 +20,7 @@ namespace Hotel_v1
 
         private DataProvider() { }
 
-        private string connectionSTR = @"Data Source=DESKTOP-RSHOI2U\SQLEXPRESS;Initial Catalog=Hotel_DBMS;Integrated Security=TrueData Source=DESKTOP-RSHOI2U\SQLEXPRESS;Initial Catalog=Hotel_DBMS;Integrated Security=True";
+        private string connectionSTR = @"Data Source=DESKTOP-RSHOI2U\SQLEXPRESS;Initial Catalog=Hotel;Integrated Security=True";
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {

@@ -23,7 +23,7 @@ namespace Hotel_v1
         {
             List<Menu> listMenu = new List<Menu>();
 
-            string query = "SELECT f.name, bi.count, f.price, f.price*bi.count AS totalPrice FROM dbo.BillInfo AS bi, dbo.Bill AS b, dbo.Service AS f WHERE bi.idBill = b.id AND bi.idService = f.id AND b.status = 0 AND b.idRoom = " + id;
+            string query = "SELECT * FROM dbo.f_GetListMenuByRoom("+id+")";
             DataTable data = DataProvider.Instance.ExecuteQuery(query);
 
             foreach (DataRow item in data.Rows)
