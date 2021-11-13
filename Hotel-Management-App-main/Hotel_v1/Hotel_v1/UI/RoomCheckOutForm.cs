@@ -125,8 +125,8 @@ namespace Hotel_v1
                     DateTime currentDate = DateTime.ParseExact(date + " " + time, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                     txbCurrent.Text = currentDate.ToString("yyyy-MM-dd HH:mm:ss");
 
-                    CustomerDAO.Instance.checkoutCustomer(result, currentDate, 1);
-                    RoomDAO.Instance.UpdateRoom(result, "Trống");
+                    CustomerDAO.Instance.checkoutCustomerTransaction(result, currentDate, 1);
+                    RoomDAO.Instance.UpdateRoomIn(result, "Trống");
                     
 
                     string daycheckin = this.customerDataGridView.CurrentRow.Cells[2].Value.ToString();

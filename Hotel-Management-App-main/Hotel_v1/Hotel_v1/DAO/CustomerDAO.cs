@@ -19,6 +19,11 @@ namespace Hotel_v1
             get { if (instance == null) instance = new CustomerDAO(); return CustomerDAO.instance; }
             private set { CustomerDAO.instance = value; }
         }
+        public void checkoutCustomerTransaction(int idroom, DateTime datecheckout, int status)
+        {
+            DataProvider.Instance.ExecuteQuery("USP_TransactionCheckOut @idroom , @datecheckout , @status ", new object[] { idroom, datecheckout, status });
+        }
+
         public void InsertCustomerCheckIn(int idroom,int idbill, string fname, string lname, string cmnd, string sex, string phone, string address, MemoryStream picture , DateTime datecheckin,int status )
         {
             DataProvider.Instance.ExecuteQuery("USP_InsertCustomerCheckIn  @idroom , @idbill , @fname , @lname , @cmnd , @sex , @phone , @address , @picture , @datecheckin , @status ", new object[] { idroom,idbill,fname,lname,cmnd,sex,phone,address,picture,datecheckin,0 });

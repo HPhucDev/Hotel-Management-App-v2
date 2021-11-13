@@ -30,37 +30,44 @@ namespace Hotel_v1
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
+            if (Global.globalUserType == "Labor" || Global.globalUserType == "Reception")
             {
-                if (txbID.Text != "" && txbPassword.Text != "" && cbBoxType.SelectedItem != null && txbFname.Text != "" && txbLname.Text != "" && txbAddress.Text != "" && txbPhone.Text != "" && picBoxImage.Image != null)
+                MessageBox.Show("Bạn không có quyền sử dụng chức năng này", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                try
                 {
-                    string id = txbID.Text;
-                    string password = txbPassword.Text;
-                    string type = cbBoxType.SelectedItem.ToString();
-                    string fname = txbFname.Text;
-                    string lname = txbLname.Text;
-                    string address = txbAddress.Text;
-                    string phone = txbPhone.Text;
-                    MemoryStream picture = new MemoryStream();
-                    picBoxImage.Image.Save(picture, picBoxImage.Image.RawFormat);
-                    if (nhanvien.insertNhanvien(id, fname, lname, address, phone, picture, password, type))
+                    if (txbID.Text != "" && txbPassword.Text != "" && cbBoxType.SelectedItem != null && txbFname.Text != "" && txbLname.Text != "" && txbAddress.Text != "" && txbPhone.Text != "" && picBoxImage.Image != null)
                     {
-                        MessageBox.Show("New Staff Added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        frmQuanLyNhanVien_Load(this, null);
+                        string id = txbID.Text;
+                        string password = txbPassword.Text;
+                        string type = cbBoxType.SelectedItem.ToString();
+                        string fname = txbFname.Text;
+                        string lname = txbLname.Text;
+                        string address = txbAddress.Text;
+                        string phone = txbPhone.Text;
+                        MemoryStream picture = new MemoryStream();
+                        picBoxImage.Image.Save(picture, picBoxImage.Image.RawFormat);
+                        if (nhanvien.insertNhanvien(id, fname, lname, address, phone, picture, password, type))
+                        {
+                            MessageBox.Show("New Staff Added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            frmQuanLyNhanVien_Load(this, null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Error", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Empty Fields", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Empty Fields", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -108,38 +115,44 @@ namespace Hotel_v1
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
-            try
+            if (Global.globalUserType == "Labor" || Global.globalUserType == "Reception")
             {
-                if (txbID.Text != "" && txbPassword.Text != "" && cbBoxType.SelectedItem != null && txbFname.Text != "" && txbLname.Text != "" && txbAddress.Text != "" && txbPhone.Text != "" && picBoxImage.Image != null)
+                MessageBox.Show("Bạn không có quyền sử dụng chức năng này", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                try
                 {
-                    string id = txbID.Text;
-                    string password = txbPassword.Text;
-                    string type = cbBoxType.SelectedItem.ToString();
-                    string fname = txbFname.Text;
-                    string lname = txbLname.Text;
-                    string address = txbAddress.Text;
-                    string phone = txbPhone.Text;
-                    MemoryStream picture = new MemoryStream();
-                    picBoxImage.Image.Save(picture, picBoxImage.Image.RawFormat);
-                    if (nhanvien.updateNhanvien(id, fname, lname, address, phone, picture, password, type))
+                    if (txbID.Text != "" && txbPassword.Text != "" && cbBoxType.SelectedItem != null && txbFname.Text != "" && txbLname.Text != "" && txbAddress.Text != "" && txbPhone.Text != "" && picBoxImage.Image != null)
                     {
-                        MessageBox.Show("Staff Have Been Updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        frmQuanLyNhanVien_Load(this, null);
+                        string id = txbID.Text;
+                        string password = txbPassword.Text;
+                        string type = cbBoxType.SelectedItem.ToString();
+                        string fname = txbFname.Text;
+                        string lname = txbLname.Text;
+                        string address = txbAddress.Text;
+                        string phone = txbPhone.Text;
+                        MemoryStream picture = new MemoryStream();
+                        picBoxImage.Image.Save(picture, picBoxImage.Image.RawFormat);
+                        if (nhanvien.updateNhanvien(id, fname, lname, address, phone, picture, password, type))
+                        {
+                            MessageBox.Show("Staff Have Been Updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            frmQuanLyNhanVien_Load(this, null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Error", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Empty Fields", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Empty Fields", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -173,36 +186,50 @@ namespace Hotel_v1
 
         private void BtnRemove_Click(object sender, EventArgs e)
         {
-            try
+            if (Global.globalUserType == "Labor" || Global.globalUserType == "Reception")
             {
-                if (txbID.Text != "")
+                MessageBox.Show("Bạn không có quyền sử dụng chức năng này", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                try
                 {
-                    string id = txbID.Text;
-            
-                    if (nhanvien.deleteNhanvien(id))
+                    if (txbID.Text != "")
                     {
-                        MessageBox.Show("Staff Have Been Deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        frmQuanLyNhanVien_Load(this, null);
+                        string id = txbID.Text;
+
+                        if (nhanvien.deleteNhanvien(id))
+                        {
+                            MessageBox.Show("Staff Have Been Deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            frmQuanLyNhanVien_Load(this, null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error", "Note", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Error", "Note", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("enter a ID", "Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("enter a ID", "Note", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("You Must Detele Calendar Before Delete Staff ! ", "Note", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("You Must Detele Calendar Before Delete Staff ! ","Note", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = nhanvien.search(txbSearch.Text);
+            if (Global.globalUserType == "Labor" || Global.globalUserType == "Reception")
+            {
+                MessageBox.Show("Bạn không có quyền sử dụng chức năng này", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                dataGridView1.DataSource = nhanvien.search(txbSearch.Text);
+            }
         }
     }
 }

@@ -19,12 +19,16 @@ namespace Hotel_v1
 
         private void ArchiveForm_Load(object sender, EventArgs e)
         {
-            archiveDataGridView.DataSource = ServiceDAO.Instance.GetArchieve();
+            try
+            {
+                archiveDataGridView.DataSource = ServiceDAO.Instance.GetArchieve();
 
-            categoryComboBox.DataSource = CategoryDAO.Instance.GetCategory();
-            categoryComboBox.DisplayMember = "name";
-            categoryComboBox.ValueMember = "id";
-            categoryComboBox.SelectedItem = null;
+                categoryComboBox.DataSource = CategoryDAO.Instance.GetCategory();
+                categoryComboBox.DisplayMember = "name";
+                categoryComboBox.ValueMember = "id";
+                categoryComboBox.SelectedItem = null;
+            }
+            catch { }
 
         }
 

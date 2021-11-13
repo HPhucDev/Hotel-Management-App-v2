@@ -115,6 +115,7 @@ namespace Hotel_v1
                 command.Parameters.Add("@Pass", SqlDbType.VarChar).Value = passwordloginTextBox.Text;
                 adapter.SelectCommand = command;
                 adapter.Fill(table);
+                db.closeConnection();
                 if (table.Rows.Count > 0)
                 {
                     this.Type = table.Rows[0]["Type"].ToString();
@@ -123,6 +124,7 @@ namespace Hotel_v1
                     MainForm main = new MainForm();
                     main.Show();
                     this.Hide();
+                    
                 }
                 else
                 {

@@ -48,6 +48,7 @@ namespace Hotel_v1
         }
         private void bookButton_Click(object sender, EventArgs e)
         {
+
                 int idroom = int.Parse(roomlistComboBox.SelectedValue.ToString());
                 string fname = firstnameTextBox.Text;
                 string lname = lastnameTextBox.Text;
@@ -73,7 +74,7 @@ namespace Hotel_v1
                 }
 
                 string status = "Đầy";
-                RoomDAO.Instance.UpdateRoom(idroom, status);
+                RoomDAO.Instance.UpdateRoomIn(idroom, status);
                 MessageBox.Show("Booked", "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
            
@@ -126,8 +127,8 @@ namespace Hotel_v1
             int serviceID = int.Parse(cbService.SelectedValue.ToString());
             int count = (int)nmserviceCount.Value;
 
-            ServiceDAO.Instance.decAmount(serviceID, count);
-           
+            //ServiceDAO.Instance.decAmount(serviceID, count);
+
             if (idBill == -1)
             {
                 BillDAO.Instance.InsertBill(room);

@@ -41,10 +41,6 @@ namespace Hotel_v1
                     MessageBox.Show("CheckOut Successed", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.None);
                     this.Close();
                 }
-                else
-                {
-                    MessageBox.Show("You Must CheckIn ", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
         }
         

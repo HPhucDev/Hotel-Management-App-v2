@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Data;
-
+using System.IO;
 namespace Hotel_v1
 {
     class ServiceDAO
@@ -118,20 +121,28 @@ namespace Hotel_v1
         }
         public bool incAmount(int id, int amount)
         {
-            SqlCommand command = new SqlCommand("UPDATE Service SET count =count+@amount WHERE id=@id", mydb.getConnection);
-            command.Parameters.Add("@id", SqlDbType.Int).Value = id;
-            command.Parameters.Add("@amount", SqlDbType.Int).Value = amount;
-            mydb.openConnection();
-            if (command.ExecuteNonQuery() == 1)
+            if (Global.globalUserType == "Reception")
             {
-                mydb.closeConnection();
-                return true;
+                MessageBox.Show("Bạn không có quyền sử dụng chức năng này", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                mydb.closeConnection();
-                return false;
+                SqlCommand command = new SqlCommand("UPDATE Service SET count =count+@amount WHERE id=@id", mydb.getConnection);
+                command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                command.Parameters.Add("@amount", SqlDbType.Int).Value = amount;
+                mydb.openConnection();
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    mydb.closeConnection();
+                    return true;
+                }
+                else
+                {
+                    mydb.closeConnection();
+                    return false;
+                }
             }
+            return false;
 
         }
         public bool decAmount(int id, int amount)

@@ -21,26 +21,20 @@ namespace Hotel_v1
         int value;
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LoadRoom();
-            LoadUser();
+            
             timer.Start();
             if (Global.globalUserType == "Labor")
             {
-                quảnLíPhòngToolStripMenuItem.Visible = false;
-                thêmXóaSửaNhânViênToolStripMenuItem.Visible = false;
-                quảnLíKháchHàngToolStripMenuItem.Visible = false;
-                thốngKêToolStripMenuItem.Visible = false;
-                lịchLàmViệcToolStripMenuItem.Visible = false;
                 flpRoom.Visible = false;
+                LoadUser();
             }
-            else if(Global.globalUserType== "Reception")
+            else
             {
-                thêmPhòngToolStripMenuItem1.Visible = false;
-                xóaPhòngToolStripMenuItem1.Visible = false;
-                dịchVụToolStripMenuItem.Visible = false;
-                thêmXóaSửaNhânViênToolStripMenuItem.Visible = false;
-                lịchLàmViệcToolStripMenuItem.Visible = false;
+                LoadRoom();
+                LoadUser();
             }
+
+       
         }
         void LoadUser()
         {
@@ -118,30 +112,62 @@ namespace Hotel_v1
         }
         private void thêmPhòngToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            List<Room> RoomList = RoomDAO.Instance.LoadRoomList();
-            string name = "Room " + (RoomList.Count + 1);
-            string status = "Trống";
-            RoomDAO.Instance.InsertRoom(name,1, status);
-            LoadRoom();
+            try
+            {
+                List<Room> RoomList = RoomDAO.Instance.LoadRoomList();
+                string name = "Room " + (RoomList.Count + 1);
+                string status = "Trống";
+                RoomDAO.Instance.InsertRoom(name, 1, status);
+                LoadRoom();
+            }
+            catch (Exception ex)
+            {
+            }
+
         }
 
         private void xóaPhòngToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ManageRoomForm manageRoom = new ManageRoomForm();
-            manageRoom.ShowDialog();
-            LoadRoom();
+            if (Global.globalUserType == "Labor")
+            {
+                MessageBox.Show("Bạn không có quyền sử dụng chức năng này", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                manageRoom.Show();
+                LoadRoom();
+            }
+             
         }
 
         private void thêmDịchVụToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddService addService = new AddService();
-            addService.ShowDialog();
+            addService.Show();
+            if (Global.globalUserType == "Labor" )
+            {
+                addService.Hide();
+            }
+            else
+            {
+
+            }
         }
 
         private void cậpNhậtDịchVỤToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateServiceForm updateService = new UpdateServiceForm();
-            updateService.ShowDialog();
+            updateService.Show();
+            if (Global.globalUserType == "Labor"|| Global.globalUserType == "Reception")
+            {
+                MessageBox.Show("Bạn không có quyền sử dụng chức năng này", "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                updateService.Hide();
+            }
+            else
+            {
+
+            }
         }
 
         private void liênHệToolStripMenuItem_Click(object sender, EventArgs e)
@@ -160,6 +186,7 @@ namespace Hotel_v1
         private void logoutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Close();
+            Global.globalUserType = "";
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
         }
@@ -174,19 +201,37 @@ namespace Hotel_v1
         {
             ArchiveForm archive = new ArchiveForm();
             archive.Show();
+            if (Global.globalUserType == "Labor")
+            {
+                archive.Hide();
+            }
+            else
+            {
+ 
+            }
+
+
         }
 
         private void danhSaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListCustomerForm listCustomerForm = new ListCustomerForm();
             listCustomerForm.Show();
+            if (Global.globalUserType == "Labor")
+            {
+                listCustomerForm.Hide();
+            }
+            else
+            {
+
+            }
         }
 
-        private void lươngToolStripMenuItem_Click(object sender, EventArgs e)
+            private void lươngToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Salary salary = new Salary();
-            salary.updateSalaryLabor();
-            salary.updateSalaryReception();
+            //salary.updateSalaryLabor();
+            //salary.updateSalaryReception();
             SalaryForDayForm salaryForDayForm = new SalaryForDayForm();
             salaryForDayForm.ShowDialog();
         }
@@ -200,12 +245,28 @@ namespace Hotel_v1
         {
             ProfitForm profitForm = new ProfitForm();
             profitForm.Show();
+            if (Global.globalUserType == "Labor")
+            {
+                profitForm.Hide();
+            }
+            else
+            {
+
+            }
         }
 
         private void chiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisbursementForm disbursement = new DisbursementForm();
             disbursement.Show();
+            if (Global.globalUserType == "Labor")
+            {
+                disbursement.Hide();
+            }
+            else
+            {
+
+            }
         }
     }
 }

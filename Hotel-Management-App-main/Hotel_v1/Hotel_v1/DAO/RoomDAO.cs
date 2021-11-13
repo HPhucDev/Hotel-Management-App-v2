@@ -21,7 +21,12 @@ namespace Hotel_v1
         public static int RoomHeight = 100;
 
         private RoomDAO() { }
-        public void InsertRoom(string name,int iD ,string status)
+        public void UpdateRoomIn(int id, string status)
+        {
+            DataProvider.Instance.ExecuteQuery("USP_NotWorking", new object[] { id, status });
+        } 
+
+            public void InsertRoom(string name,int iD ,string status)
         {
             DataProvider.Instance.ExecuteQuery("USP_InsertRoom @name , @idCategory , @status", new object[] { name, iD,  status });
         }

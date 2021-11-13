@@ -9,17 +9,17 @@ namespace Hotel_v1
 {
     class Global
     {
-        public static string globalUserType { get; private set; }
+        public static string globalUserType { get; set; }
         public static void setGlobalUserType(string Type)
         {
             globalUserType = Type;
         }
-        public static int globalUserID { get; private set; }
+        public static int globalUserID { get; set; }
         public static void setGlobalUserID(int ID)
         {
             globalUserID = ID;
         }
-        public static DataTable globalTableContactId { get; private set; }
+        public static DataTable globalTableContactId { get; set; }
         public static void setGlobalTableContactId(DataTable table)
         {
             globalTableContactId = table;

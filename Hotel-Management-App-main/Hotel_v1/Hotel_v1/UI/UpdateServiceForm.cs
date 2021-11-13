@@ -25,17 +25,25 @@ namespace Hotel_v1
         }
         public void LoadService()
         {
-            servicenameComboBox.DataSource = ServiceDAO.Instance.GetService();
-            servicenameComboBox.DisplayMember = "name";
-            servicenameComboBox.ValueMember = "id";
-            servicenameComboBox.SelectedItem = null;
+            try
+            {
+                servicenameComboBox.DataSource = ServiceDAO.Instance.GetService();
+                servicenameComboBox.DisplayMember = "name";
+                servicenameComboBox.ValueMember = "id";
+                servicenameComboBox.SelectedItem = null;
+            }
+            catch { }
         } 
         public void LoadCategory()
         {
-            categoryComboBox.DataSource = CategoryDAO.Instance.GetCategory();
-            categoryComboBox.DisplayMember = "name";
-            categoryComboBox.ValueMember = "id";
-            categoryComboBox.SelectedItem = null;
+            try
+            {
+                categoryComboBox.DataSource = CategoryDAO.Instance.GetCategory();
+                categoryComboBox.DisplayMember = "name";
+                categoryComboBox.ValueMember = "id";
+                categoryComboBox.SelectedItem = null;
+            }
+            catch { }
         }
 
         private void updateButton_Click(object sender, EventArgs e)

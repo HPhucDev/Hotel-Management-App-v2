@@ -19,21 +19,25 @@ namespace Hotel_v1
 
         private void AddService_Load(object sender, EventArgs e)
         {
-            txbServiceName.Text = "";
-            nbrAmount.Value = 1;
-            nbrPrice.Value = 10000;
-            cbxServiceName.DataSource = ServiceDAO.Instance.GetListService();
-            cbxServiceName.DisplayMember = "name";
-            cbxServiceName.ValueMember = "id";
-            cbxServiceName.SelectedItem = null;
+            try
+            {
+                txbServiceName.Text = "";
+                nbrAmount.Value = 1;
+                nbrPrice.Value = 10000;
+                cbxServiceName.DataSource = ServiceDAO.Instance.GetListService();
+                cbxServiceName.DisplayMember = "name";
+                cbxServiceName.ValueMember = "id";
+                cbxServiceName.SelectedItem = null;
 
-            categoryComboBox.DataSource = CategoryDAO.Instance.GetCategory();
-            categoryComboBox.DisplayMember = "name";
-            categoryComboBox.ValueMember = "id";
-            categoryComboBox.SelectedItem = null;
+                categoryComboBox.DataSource = CategoryDAO.Instance.GetCategory();
+                categoryComboBox.DisplayMember = "name";
+                categoryComboBox.ValueMember = "id";
+                categoryComboBox.SelectedItem = null;
 
-            txbCurrentAmount.Text = "";
-            nbrAddAmount.Value = 1;
+                txbCurrentAmount.Text = "";
+                nbrAddAmount.Value = 1;
+            }
+            catch { }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -41,7 +45,10 @@ namespace Hotel_v1
             if (txbServiceName.Text != "" && nbrAmount.Value != 0 && nbrPrice.Value != 0)
             {
                     ServiceDAO.Instance.InsertService(txbServiceName.Text,int.Parse(categoryComboBox.SelectedValue.ToString()), Convert.ToInt32(nbrPrice.Value), Convert.ToInt32(nbrAmount.Value));
-                    MessageBox.Show("Add Service success", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (Global.globalUserType == "Labor" || Global.globalUserType == "Reception")
+                {
+                }
+                else { MessageBox.Show("Add Service success", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                     AddService_Load(this, null);
             }
             else
@@ -59,7 +66,11 @@ namespace Hotel_v1
                 if (int.TryParse(cbxServiceName.SelectedValue.ToString(), out result))
                 {
                     ServiceDAO.Instance.incAmount(result, Convert.ToInt32(nbrAddAmount.Value));
-                    MessageBox.Show("Increase Service success", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (Global.globalUserType == "Labor" || Global.globalUserType == "Reception")
+                    {
+                      
+                    }
+                    else { MessageBox.Show("Increase Service success", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                     AddService_Load(this, null);
                 }
 
