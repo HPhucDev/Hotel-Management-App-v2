@@ -19,7 +19,7 @@ namespace Hotel_v1
         public static ServiceDAO Instance
         {
             get { if (instance == null) instance = new ServiceDAO(); return ServiceDAO.instance; }
-            private set { ServiceDAO.instance = value; }
+            private set { ServiceDAO.instance = value;}
         }
 
         private ServiceDAO() { }
