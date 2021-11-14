@@ -25,7 +25,7 @@ namespace Hotel_v1
         private ServiceDAO() { }
         public DataTable GetService()
         {
-            DataTable data = DataProvider.Instance.ExecuteQuery("dbo.Service_data", new object[] { });
+            DataTable data = DataProvider.Instance.ExecuteQuery("Select * from dbo.Service_data", new object[] { });
             return data;
         }
         public DataTable GetServiceID(int id)

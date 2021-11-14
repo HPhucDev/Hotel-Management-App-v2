@@ -35,11 +35,11 @@ namespace Hotel_v1
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();
-            if(role == "Manager")
+            if (role == "Manager")
             {
                 connectionSTR = connectionManager;
             }
-            else if(role == "Reception")
+            else if (role == "Reception")
             {
                 connectionSTR = connectionReception;
             }
@@ -81,7 +81,7 @@ namespace Hotel_v1
             {
                 MessageBox.Show(ex.Message);
             }
-       
+
             return data;
         }
 
